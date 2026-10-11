@@ -1,0 +1,14 @@
+import { Router } from "express";
+import { asyncHandler } from "../middleware/asyncHandler";
+import { auth } from "../middleware/auth";
+import { listDashboards, createDashboard, getDashboard, updateDashboard, deleteDashboard } from "../controllers/dashboardController";
+import { generateDashboard } from "../controllers/generationController";
+const router = Router();
+router.use(auth);
+router.get("/project/:projectId", asyncHandler(listDashboards));
+router.post("/", asyncHandler(createDashboard));
+router.post("/:id/generate", asyncHandler(generateDashboard));
+router.get("/:id", asyncHandler(getDashboard));
+router.put("/:id", asyncHandler(updateDashboard));
+router.delete("/:id", asyncHandler(deleteDashboard));
+export default router;

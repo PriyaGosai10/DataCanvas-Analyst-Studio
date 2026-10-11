@@ -1,0 +1,10 @@
+import { Router } from "express";
+import { asyncHandler } from "../middleware/asyncHandler";
+import { auth } from "../middleware/auth";
+import { createVersion, listVersions, restoreVersion } from "../controllers/versionController";
+const router = Router();
+router.use(auth);
+router.post("/:id", asyncHandler(createVersion));
+router.get("/:id", asyncHandler(listVersions));
+router.post("/:id/restore/:versionId", asyncHandler(restoreVersion));
+export default router;

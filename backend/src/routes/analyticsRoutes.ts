@@ -1,0 +1,12 @@
+import { Router } from "express";
+import { asyncHandler } from "../middleware/asyncHandler";
+import { auth } from "../middleware/auth";
+import { dataRows, aggregate, exportCsv, dataInsights } from "../controllers/analyticsController";
+const router = Router();
+router.use(auth);
+router.post("/:id/data", asyncHandler(dataRows));
+router.post("/:id/aggregate", asyncHandler(aggregate));
+router.get("/:id/export", asyncHandler(exportCsv));
+router.get("/:id/insights", asyncHandler(dataInsights));
+router.post("/:id/insights", asyncHandler(dataInsights));
+export default router;

@@ -1,0 +1,11 @@
+import { Router } from "express";
+import { asyncHandler } from "../middleware/asyncHandler";
+import { auth } from "../middleware/auth";
+import { createVisual, updateVisual, deleteVisual, duplicateVisual } from "../controllers/visualController";
+const router = Router();
+router.use(auth);
+router.post("/", asyncHandler(createVisual));
+router.put("/:id", asyncHandler(updateVisual));
+router.post("/:id/duplicate", asyncHandler(duplicateVisual));
+router.delete("/:id", asyncHandler(deleteVisual));
+export default router;

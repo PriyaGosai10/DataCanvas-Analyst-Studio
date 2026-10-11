@@ -1,0 +1,10 @@
+import { Router } from "express";
+import { asyncHandler } from "../middleware/asyncHandler";
+import { auth } from "../middleware/auth";
+import { createShare, revokeShare, publicDashboard, listShares } from "../controllers/shareController";
+const router = Router();
+router.post("/", auth, asyncHandler(createShare));
+router.get("/dashboard/:dashboardId", auth, asyncHandler(listShares));
+router.delete("/:id", auth, asyncHandler(revokeShare));
+router.get("/public/:token", asyncHandler(publicDashboard));
+export default router;

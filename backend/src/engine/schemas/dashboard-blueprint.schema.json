@@ -1,0 +1,429 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://datacanvas.io/schemas/dashboard-blueprint-1.0.0.json",
+  "title": "DataCanvas Dashboard Blueprint",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "blueprintVersion",
+    "dashboardId",
+    "meta",
+    "schemaContext",
+    "metricRegistry",
+    "visualManifest",
+    "gridLayout",
+    "designTokens",
+    "interactionWireframe",
+    "generationNotes"
+  ],
+  "properties": {
+    "$schema": {
+      "const": "https://datacanvas.io/schemas/dashboard-blueprint-1.0.0.json"
+    },
+    "blueprintVersion": {
+      "const": "1.0.0"
+    },
+    "dashboardId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "meta": {
+      "type": "object",
+      "required": [
+        "engineEdition",
+        "generationMode",
+        "createdAt",
+        "seed"
+      ],
+      "properties": {
+        "engineEdition": {
+          "type": "string"
+        },
+        "generationMode": {
+          "enum": [
+            "auto",
+            "guided"
+          ]
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "seed": {
+          "type": "string",
+          "minLength": 8
+        }
+      }
+    },
+    "schemaContext": {
+      "type": "object",
+      "required": [
+        "version",
+        "rowCount",
+        "columnCount",
+        "columns",
+        "dateTopology",
+        "warnings",
+        "sourceHeaders"
+      ],
+      "properties": {
+        "version": {
+          "const": "1.0.0"
+        },
+        "rowCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "columnCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "columns": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "required": [
+              "name",
+              "inferredType",
+              "semanticRole",
+              "confidence",
+              "missingPercent",
+              "unique",
+              "additivity"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "inferredType": {
+                "enum": [
+                  "text",
+                  "integer",
+                  "number",
+                  "currency",
+                  "percentage",
+                  "date",
+                  "boolean",
+                  "geo",
+                  "identifier",
+                  "empty"
+                ]
+              },
+              "semanticRole": {
+                "type": "string"
+              },
+              "confidence": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "missingPercent": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 100
+              },
+              "unique": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "additivity": {
+                "enum": [
+                  "additive",
+                  "semi_additive",
+                  "non_additive",
+                  "unknown"
+                ]
+              }
+            }
+          }
+        },
+        "dateTopology": {
+          "type": "array"
+        },
+        "warnings": {
+          "type": "array"
+        },
+        "sourceHeaders": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "metricRegistry": {
+      "type": "object",
+      "required": [
+        "version",
+        "metrics",
+        "dependencyGraph"
+      ],
+      "properties": {
+        "version": {
+          "const": "1.0.0"
+        },
+        "metrics": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "label",
+              "formula",
+              "dependencies",
+              "aggregation",
+              "additivity",
+              "confidence",
+              "safe"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "label": {
+                "type": "string"
+              },
+              "formula": {
+                "type": "string"
+              },
+              "dependencies": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "aggregation": {
+                "enum": [
+                  "sum",
+                  "avg",
+                  "count",
+                  "min",
+                  "max",
+                  "distinct_count"
+                ]
+              },
+              "additivity": {
+                "enum": [
+                  "additive",
+                  "semi_additive",
+                  "non_additive",
+                  "unknown"
+                ]
+              },
+              "confidence": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "safe": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "dependencyGraph": {
+          "type": "object"
+        }
+      }
+    },
+    "visualManifest": {
+      "type": "object",
+      "required": [
+        "version",
+        "visuals"
+      ],
+      "properties": {
+        "version": {
+          "const": "1.0.0"
+        },
+        "visuals": {
+          "type": "array",
+          "maxItems": 7,
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "type",
+              "title",
+              "component",
+              "aggregation",
+              "encodings",
+              "intent",
+              "priority",
+              "overflow",
+              "interactionRole"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "type": {
+                "enum": [
+                  "kpi",
+                  "bar",
+                  "line",
+                  "area",
+                  "donut",
+                  "pie",
+                  "scatter"
+                ]
+              },
+              "title": {
+                "type": "string"
+              },
+              "component": {
+                "type": "string"
+              },
+              "aggregation": {
+                "enum": [
+                  "sum",
+                  "avg",
+                  "count",
+                  "min",
+                  "max",
+                  "distinct_count"
+                ]
+              },
+              "encodings": {
+                "type": "object"
+              },
+              "intent": {
+                "type": "string"
+              },
+              "priority": {
+                "type": "number"
+              },
+              "overflow": {
+                "enum": [
+                  "truncate_others",
+                  "paginate",
+                  "internal_scroll",
+                  "fixed"
+                ]
+              },
+              "interactionRole": {
+                "enum": [
+                  "global_context",
+                  "trend",
+                  "breakdown",
+                  "detail",
+                  "kpi"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "gridLayout": {
+      "type": "object",
+      "required": [
+        "columns",
+        "gap",
+        "breakpoints",
+        "lg",
+        "md",
+        "sm"
+      ],
+      "properties": {
+        "columns": {
+          "const": 12
+        },
+        "gap": {
+          "const": 16
+        },
+        "breakpoints": {
+          "type": "object"
+        },
+        "lg": {
+          "type": "array"
+        },
+        "md": {
+          "type": "array"
+        },
+        "sm": {
+          "type": "array"
+        }
+      }
+    },
+    "designTokens": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "mode",
+        "palette",
+        "fontFamily",
+        "radius",
+        "spacing",
+        "contrastChecked"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "mode": {
+          "enum": [
+            "light",
+            "dark"
+          ]
+        },
+        "palette": {
+          "type": "object"
+        },
+        "fontFamily": {
+          "type": "string"
+        },
+        "radius": {
+          "type": "number"
+        },
+        "spacing": {
+          "type": "number"
+        },
+        "contrastChecked": {
+          "type": "boolean"
+        }
+      }
+    },
+    "interactionWireframe": {
+      "type": "object",
+      "required": [
+        "version",
+        "globalFilters",
+        "scopes",
+        "events",
+        "cycleProtection"
+      ],
+      "properties": {
+        "version": {
+          "const": "1.0.0"
+        },
+        "globalFilters": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "scopes": {
+          "type": "object"
+        },
+        "events": {
+          "type": "array"
+        },
+        "cycleProtection": {
+          "const": "origin-and-event-id"
+        }
+      }
+    },
+    "generationNotes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

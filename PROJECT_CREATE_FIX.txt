@@ -1,0 +1,15 @@
+DataCanvas project creation fix
+================================
+
+This update improves the Projects page so API/network/authentication errors appear on screen instead of silently making the Create button look broken. It also prevents a secondary activity-log write from making a successfully saved project look like it failed.
+
+After replacing your old extracted folder with this ZIP:
+
+1. Open VS Code terminal at the DataCanvas folder.
+2. Start the backend in terminal 1:
+   npm --prefix backend run dev
+3. Start the frontend in terminal 2:
+   npm --prefix frontend run dev
+4. Open the Vite URL (usually http://localhost:5173), sign in, then try New project > enter a name > Create project.
+
+If creation still fails, the Projects page now shows the actual error. Send a screenshot of that message and the backend terminal output. Do not share your MongoDB password or JWT secret.

@@ -1,0 +1,11 @@
+import { Router } from "express";
+import { asyncHandler } from "../middleware/asyncHandler";
+import { auth } from "../middleware/auth";
+import { listProjects, createProject, getProject, deleteProject } from "../controllers/projectController";
+const router = Router();
+router.use(auth);
+router.get("/", asyncHandler(listProjects));
+router.post("/", asyncHandler(createProject));
+router.get("/:id", asyncHandler(getProject));
+router.delete("/:id", asyncHandler(deleteProject));
+export default router;
