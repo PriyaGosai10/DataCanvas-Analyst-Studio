@@ -1,0 +1,13 @@
+DATACANVAS — START HERE
+
+1. Install Node.js LTS and MongoDB Community Server, or use your MongoDB Atlas URI.
+2. Open this folder in VS Code.
+3. Copy backend/.env.example to backend/.env and set MONGODB_URI and a strong JWT_SECRET.
+   Database name: datacanvas
+4. From this project root run: npm run install:all
+5. Run engine/backend tests: npm test
+6. Start both apps: npm run dev
+7. Open http://localhost:5173
+
+No OpenAI API key is needed. The profiling and dashboard generation engine is deterministic.
+If build or test fails, keep the full first error output; do not disable TypeScript strict checks.
